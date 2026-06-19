@@ -1,0 +1,12 @@
+Package: whois-nameservers
+Version: 1.0
+Section: net
+Priority: optional
+Architecture: amd64
+Maintainer: Galaxynet <89685096+NikkyBun@users.noreply.github.com>
+Depends: libc6
+Installed-Size: 12112
+Description: WHOIS Nameserver Batch Lookup
+ Desktop GUI tool to look up domain nameservers for many domains at once
+ via WHOIS and DNS. Self-contained build that bundles Python and Tk, so no
+ extra runtime packages are required.

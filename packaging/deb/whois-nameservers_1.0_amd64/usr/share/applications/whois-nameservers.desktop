@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=WHOIS Nameservers
+GenericName=Domain Nameserver Lookup
+Comment=Look up domain nameservers via WHOIS/DNS
+Exec=/opt/whois-nameservers/WHOIS-Nameservers
+Icon=whois-nameservers
+Terminal=false
+Categories=Network;Utility;
+Keywords=whois;dns;nameserver;domain;lookup;
+StartupNotify=true

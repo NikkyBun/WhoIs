@@ -1,0 +1,19 @@
+# Build environments / work dirs
+.buildenv/
+.installbuild/
+build/
+dist/
+*.spec
+
+# Large built artifacts (regenerable by CI or the build scripts)
+release/*.deb
+release/*.tar.gz
+release/*.zip
+packaging/deb/*/opt/whois-nameservers/WHOIS-Nameservers
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Claude Code session data
+.claude/
