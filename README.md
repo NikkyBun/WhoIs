@@ -9,11 +9,13 @@ python3 whois_nameservers.py
 
 ## Downloads / installers
 
+Grab a ready-to-run build from the [**Releases**](../../releases/latest) page:
+
 | Platform | How |
 |----------|-----|
-| **Windows** | Built automatically in the cloud — see [Actions](../../actions) → latest **Build Windows EXE** run → download the `WHOIS-Nameservers-windows` artifact. Tagged releases also attach the `.exe`. |
-| **Linux (Debian/Ubuntu/Mint)** | `packaging/` build of `whois-nameservers_2.23626_amd64.deb` (double-click to install). |
-| **Linux (any distro)** | `packaging/src/` — run `install.sh` to build + install for the local machine. |
+| **Windows** | Download `WHOIS-Nameservers.exe` from the latest release and run it — no install needed. (Each build is also attached to its [Actions](../../actions) **Build Windows EXE** run.) |
+| **Linux (Debian/Ubuntu/Mint)** | Download `whois-nameservers_2.23626_amd64.deb` from the latest release, then double-click it — or `sudo apt install ./whois-nameservers_2.23626_amd64.deb`. |
+| **Linux (any distro)** | Clone the repo and run `packaging/src/whois-nameservers-2.23626/install.sh` to build + install for the local machine. |
 
 ## Building the Windows .exe yourself
 
@@ -33,3 +35,7 @@ packaging/src/                universal Linux source installer
 packaging/windows/            Windows build kit (.bat + Inno Setup script)
 .github/workflows/            cloud build of the Windows .exe
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE). Use it however you like.
