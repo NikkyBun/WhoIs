@@ -5,7 +5,7 @@ Priority: optional
 Architecture: amd64
 Maintainer: NikkyBun <89685096+NikkyBun@users.noreply.github.com>
 Depends: libc6
-Installed-Size: 12196
+Installed-Size: 12200
 Description: WHOIS Nameserver Batch Lookup
  Desktop GUI tool to look up domain nameservers for many domains at once
  via WHOIS and DNS. Self-contained build that bundles Python and Tk, so no
