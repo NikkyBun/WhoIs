@@ -1,5 +1,5 @@
 WHOIS Nameserver Batch Lookup
-Copyright (c) 2026 Galaxynet <89685096+NikkyBun@users.noreply.github.com>
+Copyright (c) 2026 NikkyBun
 
 This package bundles a Python application built into a standalone
 executable with PyInstaller. The application itself uses only the

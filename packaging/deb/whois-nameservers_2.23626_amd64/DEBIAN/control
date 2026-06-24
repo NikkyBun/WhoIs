@@ -3,7 +3,7 @@ Version: 2.23626
 Section: net
 Priority: optional
 Architecture: amd64
-Maintainer: Galaxynet <89685096+NikkyBun@users.noreply.github.com>
+Maintainer: NikkyBun <89685096+NikkyBun@users.noreply.github.com>
 Depends: libc6
 Installed-Size: 12196
 Description: WHOIS Nameserver Batch Lookup
