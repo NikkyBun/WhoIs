@@ -1,8 +1,8 @@
 name: Build Windows EXE
 
-# Builds WHOIS-Nameservers.exe on a real Windows runner.
-#  - every push to main / manual run  -> downloadable build artifact
-#  - pushing a tag like v1.0           -> also attaches the .exe to a Release
+# builds WHOIS-Nameservers.exe, up on an actual windows runner.
+#  - any push to main, or a manual run  -> you get a build artifact, to download
+#  - pushing a tag, like v2.23626        -> and it sticks the .exe onto a Release aswell
 on:
   push:
     branches: [ main ]
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # allow attaching the .exe to a Release on tag pushes
+  contents: write   # so it can stick the .exe onto a Release, on the tag pushes
 
 jobs:
   build-windows:

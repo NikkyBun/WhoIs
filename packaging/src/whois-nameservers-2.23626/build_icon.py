@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Build-only helper: generate the app icon (PNG + multi-size ICO).
+"""just a little build time helper, it draws the app icon for us, a png and a
+multi size ico aswell, both of them.
 
-Runs ONLY inside the build venv (needs Pillow). Not imported by the app.
+it only ever runs inside the build venv, the one place pillow actually lives,
+the app itself never touches this file, not once, so dont worry about it.
 """
 import math
 import os
@@ -10,9 +12,9 @@ import sys
 from PIL import Image, ImageDraw
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
-SS = 4                      # supersample factor for smooth edges
+SS = 4                      # how much bigger we draw it, so the edges come out smooth, not all jaggy
 SIZE = 256
-S = SIZE * SS              # working canvas size
+S = SIZE * SS              # the real working size, before we shrink it back down at the end
 
 
 def lerp(a, b, t):
@@ -27,10 +29,10 @@ def rounded_rect_mask(size, radius):
 
 
 def main():
-    # --- background: vertical blue gradient on a rounded square ----------
+    # --- the background, a blue gradient running top to bottom, sat on a rounded square ---
     bg = Image.new("RGB", (S, S), (0, 0, 0))
-    top = (0x1E, 0x88, 0xE5)     # bright blue
-    bot = (0x0D, 0x47, 0xA1)     # deep blue
+    top = (0x1E, 0x88, 0xE5)     # the bright blue, up top
+    bot = (0x0D, 0x47, 0xA1)     # the deep blue, down the bottom
     px = bg.load()
     for y in range(S):
         col = lerp(top, bot, y / (S - 1))
@@ -42,19 +44,19 @@ def main():
 
     d = ImageDraw.Draw(base)
     white = (255, 255, 255, 255)
-    node_blue = (0x15, 0x65, 0xC0, 255)   # nodes drawn on the white lens
+    node_blue = (0x15, 0x65, 0xC0, 255)   # the little nodes, that sit on the white lens
     link_blue = (0x42, 0xA5, 0xF5, 255)
 
-    cx, cy = S * 0.42, S * 0.42      # lens centre
+    cx, cy = S * 0.42, S * 0.42      # the middle of the lens
     ring_r = 78 * SS
     ring_w = int(15 * SS)
-    glass_r = ring_r - ring_w * 0.5  # inner glass radius
+    glass_r = ring_r - ring_w * 0.5  # the glass radius, on the inside of the ring
 
-    # --- lens glass: opaque white disc -----------------------------------
+    # --- the lens glass, just a solid white disc, nothing fancy ---
     d.ellipse([cx - glass_r, cy - glass_r, cx + glass_r, cy + glass_r],
               fill=white)
 
-    # --- DNS / nameserver node graph drawn on the glass ------------------
+    # --- the dns / nameserver graph, drawn straight onto the glass ---
     nodes = [
         (cx - 36 * SS, cy - 30 * SS),
         (cx + 34 * SS, cy - 34 * SS),
@@ -69,23 +71,23 @@ def main():
         r = (13 if i == 4 else 9) * SS
         d.ellipse([nx - r, ny - r, nx + r, ny + r], fill=node_blue)
 
-    # --- magnifying glass ring -------------------------------------------
+    # --- the ring, of the magnifying glass ---
     d.ellipse([cx - ring_r, cy - ring_r, cx + ring_r, cy + ring_r],
               outline=white, width=ring_w)
 
-    # handle
+    # the handle
     ang = math.radians(45)
     hx0 = cx + math.cos(ang) * (ring_r + ring_w * 0.2)
     hy0 = cy + math.sin(ang) * (ring_r + ring_w * 0.2)
     hx1 = cx + math.cos(ang) * (ring_r + 58 * SS)
     hy1 = cy + math.sin(ang) * (ring_r + 58 * SS)
     d.line([(hx0, hy0), (hx1, hy1)], fill=white, width=int(26 * SS))
-    # rounded handle caps
+    # the handle ends, rounded off so theyre not sharp
     for (hx, hy) in ((hx0, hy0), (hx1, hy1)):
         rr = 13 * SS
         d.ellipse([hx - rr, hy - rr, hx + rr, hy + rr], fill=white)
 
-    # --- downsample & export --------------------------------------------
+    # --- shrink it all back down, and write it out to disk ---
     icon = base.resize((SIZE, SIZE), Image.LANCZOS)
     png_path = os.path.join(OUT_DIR, "whois_icon.png")
     ico_path = os.path.join(OUT_DIR, "whois_icon.ico")

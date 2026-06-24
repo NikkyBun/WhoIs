@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Remove a per-user WHOIS Nameservers installation made by install.sh.
+# rips out a per user whois nameservers install, the kind that install.sh sets up.
 set -euo pipefail
 
 SLUG="whois-nameservers"

@@ -12,7 +12,7 @@ python3 whois_nameservers.py
 | Platform | How |
 |----------|-----|
 | **Windows** | Built automatically in the cloud — see [Actions](../../actions) → latest **Build Windows EXE** run → download the `WHOIS-Nameservers-windows` artifact. Tagged releases also attach the `.exe`. |
-| **Linux (Debian/Ubuntu/Mint)** | `packaging/` build of `whois-nameservers_1.0_amd64.deb` (double-click to install). |
+| **Linux (Debian/Ubuntu/Mint)** | `packaging/` build of `whois-nameservers_2.23626_amd64.deb` (double-click to install). |
 | **Linux (any distro)** | `packaging/src/` — run `install.sh` to build + install for the local machine. |
 
 ## Building the Windows .exe yourself

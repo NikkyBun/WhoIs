@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 #
-# WHOIS Nameservers - per-user installer (no root required).
+# whois nameservers, the per user installer, no root needed, none at all.
 #
-# Default mode BUILDS a standalone binary for THIS machine with PyInstaller,
-# then installs it under ~/.local with a menu entry + icon. If the build tools
-# are missing or the build fails, it automatically falls back to installing a
-# lightweight launcher that runs the app with the system python3 (the app is
-# pure standard library).
+# the default thing it does, is build a standalone binary, just for this one
+# machine, with pyinstaller, and then drop it under ~/.local, with a menu entry
+# and an icon and the lot. and if the build tools arent around, or the build
+# just falls over on you, it quietly changes its mind, and installs a tiny
+# little launcher instead, one that runs the app off your system python3 (the
+# app is all standard library, so that works completely fine).
 #
-# Usage:
-#   ./install.sh              # build a standalone binary, then install
-#   ./install.sh --no-build   # skip building; install a python3 launcher
-#   ./install.sh --uninstall  # remove an existing installation
+# how you run it:
+#   ./install.sh              # build the standalone binary, then install it
+#   ./install.sh --no-build   # dont build, just drop in a python3 launcher
+#   ./install.sh --uninstall  # rip out an install thats already sitting there
 #   ./install.sh --help
 #
 set -euo pipefail
@@ -20,7 +21,8 @@ APP_NAME="WHOIS Nameservers"
 SLUG="whois-nameservers"
 BIN_NAME="WHOIS-Nameservers"
 
-# Resolve the directory this script lives in (so CWD does not matter).
+# work out which folder this script is actually sitting in, that way it doesnt
+# matter one bit, where you happen to run it from
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 APP_DIR="$HOME/.local/share/$SLUG"
@@ -35,7 +37,8 @@ c_warn() { printf '\033[1;33m  !\033[0m %s\n' "$*"; }
 c_err()  { printf '\033[1;31mERR\033[0m %s\n' "$*" >&2; }
 
 pkg_hint() {
-    # Best-effort, distro-aware install hint for missing prerequisites.
+    # a best guess, at the right install command, going off whatever package
+    # manager this distro happens to have, for when somethings missing
     if   command -v apt    >/dev/null 2>&1; then echo "sudo apt install $1"
     elif command -v dnf    >/dev/null 2>&1; then echo "sudo dnf install $2"
     elif command -v pacman >/dev/null 2>&1; then echo "sudo pacman -S $3"
@@ -55,7 +58,8 @@ uninstall() {
     rm -rf "$APP_DIR"
     rm -f  "$DESKTOP_FILE"
     rm -f  "$ICON_DIR/$SLUG.png"
-    # Desktop shortcut, if any (locale-aware path).
+    # and the shortcut off the actual Desktop, if theres one, mind the path can
+    # be named differently, depending on the language the system is set to
     if command -v xdg-user-dir >/dev/null 2>&1; then
         local d; d="$(xdg-user-dir DESKTOP 2>/dev/null || true)"
         [ -n "$d" ] && rm -f "$d/$SLUG.desktop"
@@ -65,7 +69,7 @@ uninstall() {
     exit 0
 }
 
-# ---- argument parsing ------------------------------------------------------
+# ---- reading the arguments, whatever got passed in ----
 MODE="build"
 for arg in "$@"; do
     case "$arg" in
@@ -78,7 +82,7 @@ for arg in "$@"; do
     esac
 done
 
-# ---- prerequisite checks ---------------------------------------------------
+# ---- making sure the stuff we need, is actually here ----
 if ! command -v python3 >/dev/null 2>&1; then
     c_err "python3 is not installed."
     c_err "Install it first: $(pkg_hint 'python3' 'python3' 'python')"
@@ -92,7 +96,7 @@ if ! python3 -c 'import tkinter' >/dev/null 2>&1; then
 fi
 c_ok "python3 and tkinter present."
 
-# ---- build (optional) ------------------------------------------------------
+# ---- the build, which is optional, we can skip it ----
 BUILT_BINARY=""
 if [ "$MODE" = "build" ]; then
     c_info "Building a standalone binary for this machine (PyInstaller)..."
@@ -129,7 +133,7 @@ if [ "$MODE" = "build" ]; then
     fi
 fi
 
-# ---- install files ---------------------------------------------------------
+# ---- putting the files where they go ----
 c_info "Installing into $APP_DIR ..."
 mkdir -p "$APP_DIR" "$DESKTOP_DIR" "$ICON_DIR"
 cp -f "$SCRIPT_DIR/whois_icon.png" "$APP_DIR/whois_icon.png"
@@ -146,7 +150,7 @@ else
     KIND="python3 launcher"
 fi
 
-# ---- desktop entry ---------------------------------------------------------
+# ---- the desktop entry, so it shows up in the menu ----
 cat > "$DESKTOP_FILE" <<EOF
 [Desktop Entry]
 Type=Application
@@ -163,7 +167,7 @@ StartupNotify=true
 EOF
 chmod +x "$DESKTOP_FILE"
 
-# ---- optional Desktop shortcut --------------------------------------------
+# ---- a shortcut on the Desktop too, if we can manage it ----
 if command -v xdg-user-dir >/dev/null 2>&1; then
     DESK="$(xdg-user-dir DESKTOP 2>/dev/null || true)"
     if [ -n "$DESK" ] && [ -d "$DESK" ]; then
@@ -177,7 +181,7 @@ fi
 
 refresh_caches
 
-# ---- clean up build artifacts ---------------------------------------------
+# ---- tidying up, clearing out the build leftovers ----
 rm -rf "$BUILD_DIR"
 
 echo

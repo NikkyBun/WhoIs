@@ -14,6 +14,3 @@ packaging/deb/*/opt/whois-nameservers/WHOIS-Nameservers
 # Python caches
 __pycache__/
 *.pyc
-
-# Claude Code session data
-.claude/

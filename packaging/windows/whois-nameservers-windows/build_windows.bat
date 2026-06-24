@@ -7,7 +7,7 @@ echo   Building WHOIS Nameservers for Windows
 echo ============================================================
 echo.
 
-REM --- locate Python 3 -------------------------------------------------
+rem --- go find python 3, wherever it is hiding on this pc ---
 set "PY="
 where py >nul 2>nul && set "PY=py -3"
 if not defined PY (
@@ -26,19 +26,19 @@ if not defined PY (
 echo Using Python: %PY%
 echo.
 
-REM --- isolated build environment -------------------------------------
+rem --- the build environment, kept off on its own, all isolated ---
 echo [1/3] Creating an isolated build environment...
 %PY% -m venv .buildenv
 if errorlevel 1 ( echo ERROR: could not create the build venv. & pause & exit /b 1 )
 call ".buildenv\Scripts\activate.bat"
 
-REM --- install PyInstaller --------------------------------------------
+rem --- now go and grab pyinstaller ---
 echo [2/3] Installing PyInstaller ^(needs internet, one time^)...
 python -m pip install --upgrade pip >nul
 python -m pip install pyinstaller
 if errorlevel 1 ( echo ERROR: pip could not install PyInstaller. & pause & exit /b 1 )
 
-REM --- build the windowed, single-file exe with embedded icon ---------
+rem --- build the exe, windowed, all one single file, the icon baked right in ---
 echo [3/3] Building WHOIS-Nameservers.exe...
 pyinstaller --onefile --windowed --name "WHOIS-Nameservers" --icon "whois_icon.ico" whois_nameservers.py
 if errorlevel 1 ( echo ERROR: the PyInstaller build failed. & pause & exit /b 1 )

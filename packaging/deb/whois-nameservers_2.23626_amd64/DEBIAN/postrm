@@ -1,8 +1,8 @@
 #!/bin/sh
-# Refresh the desktop menu and icon caches after install.
+# refresh the caches after its pulled out, so the menu entry, just disappears nicely.
 set -e
 
-if [ "$1" = "configure" ]; then
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     if command -v update-desktop-database >/dev/null 2>&1; then
         update-desktop-database -q /usr/share/applications || true
     fi

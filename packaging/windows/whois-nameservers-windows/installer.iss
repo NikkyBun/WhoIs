@@ -1,18 +1,18 @@
-; Inno Setup script for WHOIS Nameservers
+; the inno setup script, for whois nameservers
 ; ---------------------------------------------------------------------------
-; HOW TO USE:
-;   1. First build the .exe:  double-click build_windows.bat
-;      (this creates  dist\WHOIS-Nameservers.exe)
-;   2. Install Inno Setup:    https://jrsoftware.org/isdl.php
-;   3. Right-click this file -> "Compile"  (or open it in Inno Setup and press F9)
-;   4. The finished installer appears in:  installer-output\WHOIS-Nameservers-Setup.exe
+; how you use it:
+;   1. build the .exe first, just double click build_windows.bat
+;      (that one gives you  dist\WHOIS-Nameservers.exe)
+;   2. then go get inno setup, off  https://jrsoftware.org/isdl.php
+;   3. right click this file, and hit "Compile" (or open it up inside inno setup, and press F9)
+;   4. and the finished installer, it turns up in  installer-output\WHOIS-Nameservers-Setup.exe
 ;
-; The installer is per-user (no administrator rights required).
+; the installer is per user, so theres no admin rights needed, none at all.
 ; ---------------------------------------------------------------------------
 
 [Setup]
 AppName=WHOIS Nameservers
-AppVersion=1.0
+AppVersion=2.23626
 AppPublisher=Galaxynet
 DefaultDirName={localappdata}\Programs\WHOIS Nameservers
 DefaultGroupName=WHOIS Nameservers

@@ -4,7 +4,7 @@ WHOIS Nameservers — how to share it
 This folder has TWO installers. Pick based on who you're giving it to.
 
 
-1) whois-nameservers_1.0_amd64.deb
+1) whois-nameservers_2.23626_amd64.deb
 ----------------------------------
 Best for friends on Linux Mint / Ubuntu / Debian (64-bit Intel/AMD).
 
@@ -12,7 +12,7 @@ They just DOUBLE-CLICK the .deb -> the system installer opens -> "Install"
 -> password. It adds "WHOIS Nameservers" to the applications menu with the
 icon. No Python needed (the binary is self-contained).
 
-  Install from a terminal instead:  sudo apt install ./whois-nameservers_1.0_amd64.deb
+  Install from a terminal instead:  sudo apt install ./whois-nameservers_2.23626_amd64.deb
   Uninstall:                        sudo apt remove whois-nameservers
 
   Works on:  64-bit (amd64) Debian-family Linux, same or newer than the build
@@ -20,7 +20,7 @@ icon. No Python needed (the binary is self-contained).
   Won't run: Windows, macOS, ARM (Raspberry Pi etc.), or non-amd64 systems.
 
 
-2) whois-nameservers-1.0-src.tar.gz
+2) whois-nameservers-2.23626-src.tar.gz
 -----------------------------------
 Best for ANY other Linux (Fedora, Arch, ARM, older or newer systems).
 
@@ -37,7 +37,7 @@ still ends up working.
           for the build, also python3-venv + pip + internet (one-time, ~1 min).
 
 
-3) whois-nameservers-1.0-windows-buildkit.zip
+3) whois-nameservers-2.23626-windows-buildkit.zip
 ---------------------------------------------
 For Windows 10/11 users.
 
