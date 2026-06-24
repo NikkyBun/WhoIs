@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-galaxynet - whois nameserver batch lookup
+nikkybun - whois nameserver batch lookup
 =========================================
 so basically, you paste a bunch of domains, all at once, doesnt matter how you
 separate them, newline or space or comma, its all the same to it. then for each
@@ -24,7 +24,7 @@ gui (thats the default, you just double click it / run it with no args):
 
 cli:
     python3 whois_nameservers.py domains.txt            # domains from a file
-    python3 whois_nameservers.py example.com galaxynet.gr
+    python3 whois_nameservers.py example.com ntua.gr
     cat domains.txt | python3 whois_nameservers.py -    # read it from stdin
     stick --dns   on it, to force dns only (fastest, and honestly most reliable)
     stick --whois on it, to force whois only, with no dns fallback at all
@@ -484,7 +484,7 @@ def run_cli(domains, method="auto"):
     if not domains:
         print("No valid domains given.")
         return
-    print("Galaxynet WHOIS Nameservers v%s" % __version__)
+    print("NikkyBun WHOIS Nameservers v%s" % __version__)
     print("Looking up %d domain(s) via '%s'...\n" % (len(domains), method))
 
     def cb(done, total, d, ns, src):
@@ -519,12 +519,12 @@ def run_gui():
         try:
             import ctypes
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-                "galaxynet.whois.nameservers")
+                "nikkybun.whois.nameservers")
         except Exception:
             pass
 
     root = tk.Tk()
-    root.title("Galaxynet — WHOIS Nameserver Batch Lookup  v%s" % __version__)
+    root.title("NikkyBun — WHOIS Nameserver Batch Lookup  v%s" % __version__)
     root.geometry("940x720")
     root.minsize(760, 560)
 
@@ -547,7 +547,7 @@ def run_gui():
     ttk.Label(main, text="Domains (paste a batch — newline / space / comma):").pack(anchor="w")
     input_txt = tk.Text(main, height=8, font=mono, wrap="word", undo=True)
     input_txt.pack(fill="x", pady=(2, 8))
-    input_txt.insert("1.0", "example.com\ngalaxynet.gr\n")
+    input_txt.insert("1.0", "example.com\nntua.gr\n")
 
     # ----- the options row -----
     opt = ttk.Frame(main)
@@ -914,7 +914,7 @@ def run_gui():
 if __name__ == "__main__":
     args = sys.argv[1:]
     if "--version" in args or "-V" in args:
-        print("Galaxynet WHOIS Nameservers v%s" % __version__)
+        print("NikkyBun WHOIS Nameservers v%s" % __version__)
         sys.exit(0)
     if args:
         method = "auto"

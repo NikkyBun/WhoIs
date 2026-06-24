@@ -13,7 +13,7 @@
 [Setup]
 AppName=WHOIS Nameservers
 AppVersion=2.23626
-AppPublisher=Galaxynet
+AppPublisher=NikkyBun
 DefaultDirName={localappdata}\Programs\WHOIS Nameservers
 DefaultGroupName=WHOIS Nameservers
 DisableProgramGroupPage=yes
